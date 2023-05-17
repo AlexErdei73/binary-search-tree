@@ -1,0 +1,22 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.0",
+  "description": "This is a project in the JavaScript part of The Odin Project, where we learn about algorithms and data structures. This is [the website of the project](https://www.theodinproject.com/lessons/javascript-binary-search-trees).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexErdei73/binary-search-tree.git"
+  },
+  "author": "Alex Erdei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexErdei73/binary-search-tree/issues"
+  },
+  "homepage": "https://github.com/AlexErdei73/binary-search-tree#readme",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
