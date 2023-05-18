@@ -37,6 +37,27 @@ export class Tree {
     return newNode;
   }
 
+  prettyPrint(node = this._root, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.rightNode !== null) {
+      this.prettyPrint(
+        node.rightNode,
+        `${prefix}${isLeft ? "│   " : "    "}`,
+        false
+      );
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+    if (node.leftNode !== null) {
+      this.prettyPrint(
+        node.leftNode,
+        `${prefix}${isLeft ? "    " : "│   "}`,
+        true
+      );
+    }
+  }
+
   buildTree(arr: number[]) {
     const sortedArr = mergeSort(arr);
     this._removeDuplicates(sortedArr);
