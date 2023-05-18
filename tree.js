@@ -20,7 +20,8 @@ var Tree = /** @class */ (function () {
     };
     Tree.prototype.buildTree = function (arr) {
         var sortedArr = (0, mergesort_1.mergeSort)(arr);
-        return this._removeDuplicates(sortedArr);
+        this._removeDuplicates(sortedArr);
+        return sortedArr;
     };
     return Tree;
 }());
