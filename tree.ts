@@ -21,8 +21,8 @@ export class Tree {
     const len = sortedArr.length;
     const newNode = new Node();
 
-    if (len === 1) {
-      newNode.value = sortedArr[0];
+    if (len <= 1) {
+      if (sortedArr[0]) newNode.value = sortedArr[0];
       newNode.leftNode = null;
       newNode.rightNode = null;
     } else {
@@ -62,6 +62,7 @@ export class Tree {
     const sortedArr = mergeSort(arr);
     this._removeDuplicates(sortedArr);
 
-    return this._buildTree(sortedArr);
+    this._root = this._buildTree(sortedArr);
+    return this._root;
   }
 }
