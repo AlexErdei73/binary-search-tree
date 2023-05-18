@@ -27,7 +27,7 @@ function merge(sortedLeftArr: number[], sortedRightArr: number[]) {
   return sortedArr;
 }
 
-export function mergeSort(arr: number[]) {
+export function mergeSort(arr: number[]): number[] {
   const n = arr.length;
   if (n <= 1) return arr;
 
