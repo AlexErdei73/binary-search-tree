@@ -32,6 +32,7 @@ export class Tree {
 		} else {
 			const mid = Math.floor(len / 2);
 			newNode.value = sortedArr[mid];
+			newNode.parent = parent;
 			const leftArr = sortedArr.slice(0, mid);
 			const rightArr = sortedArr.slice(mid + 1, len);
 			newNode.leftNode = this._buildTree(leftArr, newNode);
@@ -89,5 +90,24 @@ export class Tree {
 				} else currentNode = currentNode.rightNode;
 			} else if (currentNode.value === node.value) done = true;
 		}
+	}
+
+	private _find(value: number, node: Node): Node | null {
+		if (!node.value && node.value !== 0) return null;
+		if (node.value === value) return node;
+		else if (node.value > value) {
+			if (node.leftNode) return this._find(value, node.leftNode);
+		} else if (node.value < value) {
+			if (node.rightNode) return this._find(value, node.rightNode);
+		}
+		return null;
+	}
+
+	find(value: number) {
+		return this._find(value, this._root);
+	}
+
+	get root() {
+		return this._root;
 	}
 }
