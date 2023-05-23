@@ -17,7 +17,7 @@ export class Tree {
     return sortedArr;
   }
 
-  private _buildTree(sortedArr: number[]): Node {
+  private _buildTree(sortedArr: number[], parent: Node | null): Node {
     const len = sortedArr.length;
     let newNode: Node | null = new Node();
 
@@ -25,6 +25,7 @@ export class Tree {
       if (sortedArr[0] || sortedArr[0] === 0) newNode.value = sortedArr[0];
       else newNode = null;
       if (newNode) {
+        newNode.parent = parent;
         newNode.leftNode = null;
         newNode.rightNode = null;
       }
@@ -33,8 +34,8 @@ export class Tree {
       newNode.value = sortedArr[mid];
       const leftArr = sortedArr.slice(0, mid);
       const rightArr = sortedArr.slice(mid + 1, len);
-      newNode.leftNode = this._buildTree(leftArr);
-      newNode.rightNode = this._buildTree(rightArr);
+      newNode.leftNode = this._buildTree(leftArr, newNode);
+      newNode.rightNode = this._buildTree(rightArr, newNode);
     }
 
     return newNode as Node;
@@ -65,7 +66,7 @@ export class Tree {
     const sortedArr = mergeSort(arr);
     this._removeDuplicates(sortedArr);
 
-    this._root = this._buildTree(sortedArr);
+    this._root = this._buildTree(sortedArr, null);
     return this._root;
   }
 
