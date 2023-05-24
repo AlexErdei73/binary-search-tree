@@ -107,6 +107,59 @@ export class Tree {
 		return this._find(value, this._root);
 	}
 
+	delete(value: number) {
+		const node = this.find(value);
+		if (!node) return;
+
+		if (!node.leftNode && !node.rightNode) {
+			if (!node.parent) return;
+			if (node.parent.leftNode?.value === value) node.parent.leftNode = null;
+			else node.parent.rightNode = null;
+			return;
+		}
+
+		if (node.leftNode && !node.rightNode) {
+			if (!node.parent) {
+				this._root = node.leftNode;
+				node.leftNode.parent = null;
+				return;
+			}
+			if (node.parent.leftNode?.value === value) {
+				node.parent.leftNode = node.leftNode;
+				node.leftNode.parent = node.parent;
+			} else {
+				node.parent.rightNode = node.leftNode;
+				node.leftNode.parent = node.parent;
+			}
+			return;
+		}
+
+		if (!node.leftNode && node.rightNode) {
+			if (!node.parent) {
+				this._root = node;
+				node.parent = null;
+				return;
+			}
+			if (node.parent.leftNode?.value === value) {
+				node.parent.leftNode = node.rightNode;
+				node.rightNode.parent = node.parent;
+			} else {
+				node.parent.rightNode = node.rightNode;
+				node.rightNode.parent = node.parent;
+			}
+			return;
+		}
+
+		let substitute = node.rightNode as Node;
+		while (substitute.leftNode) {
+			substitute = substitute.leftNode;
+		}
+		node.value = substitute.value;
+		if ((substitute.parent as Node).leftNode?.value === substitute.value) {
+			(substitute.parent as Node).leftNode = null;
+		} else (substitute.parent as Node).rightNode = null;
+	}
+
 	get root() {
 		return this._root;
 	}
