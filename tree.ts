@@ -161,6 +161,20 @@ export class Tree {
     else substParent.rightNode = null;
   }
 
+  levelOrder(callback?: Function) {
+    const queue: Node[] = [this._root];
+    const result: number[] = [];
+    let nextNode: Node;
+    while (queue.length > 0) {
+      nextNode = queue.shift() as Node;
+      if (callback) callback(nextNode);
+      else result.push(nextNode.value);
+      if (nextNode.leftNode) queue.push(nextNode.leftNode);
+      if (nextNode.rightNode) queue.push(nextNode.rightNode);
+    }
+    if (result.length > 0) return result;
+  }
+
   get root() {
     return this._root;
   }
