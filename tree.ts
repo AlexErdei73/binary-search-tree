@@ -175,6 +175,29 @@ export class Tree {
     if (result.length > 0) return result;
   }
 
+  levelOrderRecursive(
+    levelNodes: Node[] = [this._root],
+    callback?: Function
+  ): number[] | undefined {
+    if (levelNodes.length === 0) return;
+    const nextLevelNodes: Node[] = [];
+    const result: number[] = [];
+    levelNodes.forEach((node) => {
+      if (node.leftNode) nextLevelNodes.push(node.leftNode);
+      if (node.rightNode) nextLevelNodes.push(node.rightNode);
+      if (callback) callback(node);
+      else result.push(node.value);
+    });
+    if (callback) this.levelOrderRecursive(nextLevelNodes, callback);
+    else {
+      const nextLevelResult = this.levelOrderRecursive(
+        nextLevelNodes
+      ) as number[];
+      if (nextLevelResult) return result.concat(nextLevelResult);
+      else return result;
+    }
+  }
+
   get root() {
     return this._root;
   }
