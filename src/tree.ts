@@ -198,6 +198,19 @@ export class Tree {
     }
   }
 
+  inorder(callback?: Function, node: Node | null = this._root) {
+    if (!node) return;
+
+    const result: number[] = [];
+    if (callback) this.inorder(callback, node.leftNode);
+    else this.inorder((node: Node) => result.push(node.value), node.leftNode);
+    if (callback) callback(node);
+    else result.push(node.value);
+    if (callback) this.inorder(callback, node.rightNode);
+    else this.inorder((node: Node) => result.push(node.value), node.rightNode);
+    if (!callback) return result;
+  }
+
   get root() {
     return this._root;
   }
