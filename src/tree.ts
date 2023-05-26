@@ -215,13 +215,16 @@ export class Tree {
     if (!node) return;
 
     const result: number[] = [];
-    if (callback) callback(node);
-    else result.push(node.value);
-    if (callback) this.preorder(callback, node.leftNode);
-    else this.preorder((node: Node) => result.push(node.value), node.leftNode);
-    if (callback) this.preorder(callback, node.rightNode);
-    else this.preorder((node: Node) => result.push(node.value), node.rightNode);
-    if (!callback) return result;
+    if (callback) {
+      callback(node);
+      this.preorder(callback, node.leftNode);
+      this.preorder(callback, node.rightNode);
+    } else {
+      result.push(node.value);
+      this.preorder((node: Node) => result.push(node.value), node.leftNode);
+      this.preorder((node: Node) => result.push(node.value), node.rightNode);
+      return result;
+    }
   }
 
   get root() {
