@@ -7,7 +7,7 @@ interface FindResult {
 }
 
 export class Tree {
-  private _root: Node;
+  private _root = new Node();
 
   private _removeDuplicates(sortedArr: number[]) {
     let previous: number | null = null;

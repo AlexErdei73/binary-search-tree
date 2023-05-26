@@ -4,7 +4,10 @@
   "description": "This is a project in the JavaScript part of The Odin Project, where we learn about algorithms and data structures. This is [the website of the project](https://www.theodinproject.com/lessons/javascript-binary-search-trees).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:build": "tsc -w",
+    "start:run": "nodemon build/app.js",
+    "start": "concurrently npm:start:*"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,8 @@
   },
   "homepage": "https://github.com/AlexErdei73/binary-search-tree#readme",
   "devDependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22",
     "typescript": "^5.0.4"
   }
 }
