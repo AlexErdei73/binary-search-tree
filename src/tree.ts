@@ -230,6 +230,22 @@ export class Tree {
     }
   }
 
+  postorder(callback?: Function, node: Node | null = this._root) {
+    if (!node) return;
+
+    const result: number[] = [];
+    if (callback) {
+      this.postorder(callback, node.leftNode);
+      this.postorder(callback, node.rightNode);
+      callback(node);
+    } else {
+      this.postorder((node: Node) => result.push(node.value), node.leftNode);
+      this.postorder((node: Node) => result.push(node.value), node.rightNode);
+      result.push(node.value);
+      return result;
+    }
+  }
+
   get root() {
     return this._root;
   }
