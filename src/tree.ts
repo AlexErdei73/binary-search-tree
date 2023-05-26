@@ -202,13 +202,16 @@ export class Tree {
     if (!node) return;
 
     const result: number[] = [];
-    if (callback) this.inorder(callback, node.leftNode);
-    else this.inorder((node: Node) => result.push(node.value), node.leftNode);
-    if (callback) callback(node);
-    else result.push(node.value);
-    if (callback) this.inorder(callback, node.rightNode);
-    else this.inorder((node: Node) => result.push(node.value), node.rightNode);
-    if (!callback) return result;
+    if (callback) {
+      this.inorder(callback, node.leftNode);
+      callback(node);
+      this.inorder(callback, node.rightNode);
+    } else {
+      this.inorder((node: Node) => result.push(node.value), node.leftNode);
+      result.push(node.value);
+      this.inorder((node: Node) => result.push(node.value), node.rightNode);
+      return result;
+    }
   }
 
   preorder(callback?: Function, node: Node | null = this._root) {
