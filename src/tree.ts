@@ -211,6 +211,19 @@ export class Tree {
     if (!callback) return result;
   }
 
+  preorder(callback?: Function, node: Node | null = this._root) {
+    if (!node) return;
+
+    const result: number[] = [];
+    if (callback) callback(node);
+    else result.push(node.value);
+    if (callback) this.preorder(callback, node.leftNode);
+    else this.preorder((node: Node) => result.push(node.value), node.leftNode);
+    if (callback) this.preorder(callback, node.rightNode);
+    else this.preorder((node: Node) => result.push(node.value), node.rightNode);
+    if (!callback) return result;
+  }
+
   get root() {
     return this._root;
   }
