@@ -4,6 +4,7 @@ import { mergeSort } from "./mergesort";
 interface FindResult {
 	node: Node | null;
 	parent: Node | null;
+	depth: number;
 }
 
 export class Tree {
@@ -94,16 +95,23 @@ export class Tree {
 	}
 
 	private _find(value: number, node: Node, parent: Node | null): FindResult {
-		const result: FindResult = { node: null, parent: null };
+		let result: FindResult = { node: null, parent: null, depth: -1 };
 		if (!node.value && node.value !== 0) return result;
 		if (node.value === value) {
 			result.node = node;
 			result.parent = parent;
+			result.depth = 0;
 			return result;
 		} else if (node.value > value) {
-			if (node.leftNode) return this._find(value, node.leftNode, node);
+			if (node.leftNode) {
+				result = this._find(value, node.leftNode, node);
+				result.depth++;
+			}
 		} else if (node.value < value) {
-			if (node.rightNode) return this._find(value, node.rightNode, node);
+			if (node.rightNode) {
+				result = this._find(value, node.rightNode, node);
+				result.depth++;
+			}
 		}
 		return result;
 	}
@@ -257,6 +265,10 @@ export class Tree {
 		}
 		result++;
 		return result;
+	}
+
+	depth(node: Node): number {
+		return this._find(node.value, this._root, null).depth;
 	}
 
 	get root() {

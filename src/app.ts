@@ -9,3 +9,4 @@ console.log(tree.postorder());
 console.log(tree.height(tree.find(67) as Node));
 tree.insert(320);
 console.log(tree.height(tree.find(67) as Node));
+console.log(tree.depth(tree.find(23) as Node));
