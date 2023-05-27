@@ -6,3 +6,6 @@ const tree = new Tree();
 tree.buildTree(arr);
 tree.prettyPrint();
 console.log(tree.postorder());
+console.log(tree.height(tree.find(67) as Node));
+tree.insert(320);
+console.log(tree.height(tree.find(67) as Node));
