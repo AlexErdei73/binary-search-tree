@@ -9,3 +9,6 @@ console.log(`Is tree balanced: ${tree.isBalanced()}`);
 tree.insert(320);
 tree.prettyPrint();
 console.log(`Is tree balanced: ${tree.isBalanced()}`);
+tree.rebalance();
+console.log(`Is tree balanced: ${tree.isBalanced()}`);
+tree.prettyPrint();
