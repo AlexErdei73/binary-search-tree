@@ -1,14 +1,39 @@
 import { Tree } from "./tree";
-import { Node } from "./node";
 
-const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+function randomNumbers(
+	maxNumberOfElements: number,
+	highestNumber: number
+): number[] {
+	const result: number[] = [];
+	const numberOfElements = Math.floor(Math.random() * maxNumberOfElements + 1);
+	for (let i = 0; i < numberOfElements; i++) {
+		result.push(Math.floor(Math.random() * highestNumber + 1));
+	}
+	return result;
+}
+
+function printTraversals() {
+	console.log("Preorder traversal: ", tree.preorder());
+	console.log("Inorder traversal: ", tree.inorder());
+	console.log("Postorder traversal: ", tree.postorder());
+}
+
+function addNumbers(numberOfItems: number, lowest: number, highest: number) {
+	for (let i = 0; i < numberOfItems; i++) {
+		tree.insert(Math.floor(Math.random() * (highest - lowest) + lowest));
+	}
+}
+
+const arr = randomNumbers(30, 100);
 const tree = new Tree();
 tree.buildTree(arr);
 tree.prettyPrint();
 console.log(`Is tree balanced: ${tree.isBalanced()}`);
-tree.insert(320);
+printTraversals();
+addNumbers(5, 101, 200);
 tree.prettyPrint();
 console.log(`Is tree balanced: ${tree.isBalanced()}`);
 tree.rebalance();
-console.log(`Is tree balanced: ${tree.isBalanced()}`);
 tree.prettyPrint();
+console.log(`Is tree balanced: ${tree.isBalanced()}`);
+printTraversals();
